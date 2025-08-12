@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\..\..\contracts\dag.api.yaml" Namespace="LearningPath.Api.Dag" ClassName="DagClient" Link="OpenAPIs\dag.api.yaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -30,6 +26,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="..\..\..\..\contracts\dag.api.yaml" Namespace="LearningPath.Api.Dag" ClassName="DagClient" Link="OpenAPIs\dag.api.yaml" />
+    <OpenApiReference Include="..\..\..\..\contracts\apiserver.api.yaml" Link="OpenAPIs\apiserver.api.yaml" />
   </ItemGroup>
 
 </Project>
