@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Contracts\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <OpenApiReference Include=".\Contracts\dag.api.yaml" Namespace="LearningPath.Gateway.Dag" ClassName="DagClient" />
   </ItemGroup>
 
