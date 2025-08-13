@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -26,11 +26,15 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Contracts\" />
   </ItemGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\..\..\contracts\dag.api.yaml" Namespace="LearningPath.Api.Dag" ClassName="DagClient" Link="OpenAPIs\dag.api.yaml" />
-    <OpenApiReference Include="..\..\..\..\contracts\apiserver.api.yaml" Link="OpenAPIs\apiserver.api.yaml" />
+    <OpenApiReference Include=".\Contracts\dag.api.yaml" Namespace="LearningPath.Gateway.Dag" ClassName="DagClient" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="openapi-generator-cli generate -i ./Contracts/gateway.api.yaml -g aspnetcore -o ../ -t ./Templates/aspnetcore --global-property apis,models,attributes,apiDocs=false,apiTests=false,modelDocs=false,modelTests=false --additional-properties=packageName=LearningPath.Gateway,generateSourceCodeOnly=true" />
+  </Target>
 
 </Project>

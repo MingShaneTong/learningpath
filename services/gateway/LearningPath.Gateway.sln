@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPath.Api", "src\LearningPath.Api\LearningPath.Api.csproj", "{DFA7B778-CEF3-4E43-8AD6-957305A3843E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPath.Gateway", "src\LearningPath.Gateway\LearningPath.Gateway.csproj", "{DFA7B778-CEF3-4E43-8AD6-957305A3843E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

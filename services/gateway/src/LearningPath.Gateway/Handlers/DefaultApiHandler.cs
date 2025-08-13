@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace LearningPath.Api.Handlers
+namespace LearningPath.Gateway.Handlers
 {
 	public interface IDefaultApiHandler
 	{

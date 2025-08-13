@@ -13,7 +13,7 @@ using System.ComponentModel;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace LearningPath.Api.Converters
+namespace LearningPath.Gateway.Converters
 {
     /// <summary>
     /// Custom string to enum converter

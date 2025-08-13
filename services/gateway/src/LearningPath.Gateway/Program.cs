@@ -1,4 +1,4 @@
-using LearningPath.Api.Handlers;
+using LearningPath.Gateway.Handlers;
 using Microsoft.AspNetCore.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);

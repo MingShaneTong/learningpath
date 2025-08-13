@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace LearningPath.Api.Handlers
+namespace LearningPath.Gateway.Handlers
 {
 	public interface IUsersApiHandler
 	{
