@@ -1,13 +1,26 @@
-Copy-Item -Path "./contracts/gateway.api.yaml" -Destination "./services/gateway/src/LearningPath.Gateway/Contracts/gateway.api.yaml"
-Copy-Item -Path "./contracts/dag.api.yaml" -Destination "./services/gateway/src/LearningPath.Gateway/Contracts/dag.api.yaml"
+function Copy-ItemEnsuringDirectory {
+	[CmdletBinding()]
+	param(
+		[Parameter(Mandatory = $true)]
+		[string] $Source,
+		[Parameter(Mandatory = $true)]
+		[string] $Destination
+	)
+	$destinationFolder = Split-Path -Path $Destination -Parent
+	if (-not (Test-Path -Path $destinationFolder)) {
+		New-Item -ItemType Directory -Path $destinationFolder -Force | Out-Null
+	}
+	Copy-Item -Path $Source -Destination $Destination -Force
+}
 
-Copy-Item -Path "./contracts/gateway.api.yaml" -Destination "./services/webserver/web/contracts/gateway.api.yaml"
+"Distributing Contracts to Gateway Service"
+Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "./services/gateway/src/LearningPath.Gateway/Contracts/gateway.api.yaml"
+Copy-ItemEnsuringDirectory -Source "./contracts/dag.api.yaml" -Destination "./services/gateway/src/LearningPath.Gateway/Contracts/dag.api.yaml"
 
-# openapi-generator-cli generate -i ./contracts/gateway.api.yaml -g aspnetcore -o ./services/gateway/ -t ./contracts/template/aspnetcore --global-property apis,models,attributes,apiDocs=false,apiTests=false,modelDocs=false,modelTests=false --additional-properties=packageName=LearningPath.Gateway,generateSourceCodeOnly=true
+"Distributing Contracts to Web Service"
+Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "./services/webserver/web/contracts/gateway.api.yaml"
 
-
-# openapi-generator-cli generate -i ./contracts/apiserver.api.yaml -g typescript-node -o ./services/webserver/clients/apiserver --additional-properties=generateSourceCodeOnly=true
-
-# openapi-generator-cli generate -i ./contracts/dag.api.yaml -g csharp -o ./services/apiserver/dagclient --additional-properties=packageName=Learning.Api.Dag.Clients,generateSourceCodeOnly=true
+"Distributing Contracts to DAG Service"
+Copy-ItemEnsuringDirectory -Source "./contracts/dag.api.yaml" -Destination "./services/dag/contracts/dag.api.yaml"
 
 pause
