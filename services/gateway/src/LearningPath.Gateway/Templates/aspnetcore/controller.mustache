@@ -1,0 +1,80 @@
+{{>partial_header}}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+{{#operationResultTask}}
+using System.Threading;
+using System.Threading.Tasks;
+{{/operationResultTask}}
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+{{#useSwashbuckle}}
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.SwaggerGen;
+{{/useSwashbuckle}}
+{{^isLibrary}}
+{{#useNewtonsoft}}
+using Newtonsoft.Json;
+{{/useNewtonsoft}}
+{{^useNewtonsoft}}
+using System.Text.Json;
+{{/useNewtonsoft}}
+{{/isLibrary}}
+using {{packageName}}.Attributes;
+using {{packageName}}.Handlers;
+using {{modelPackage}};
+
+namespace {{apiPackage}}
+{ {{#operations}}
+    /// <summary>
+    /// {{description}}
+    /// </summary>{{#description}}
+    [Description("{{.}}")]{{/description}}
+    [ApiController]
+    public {{#classModifier}}{{.}} {{/classModifier}}class {{classname}}Controller : ControllerBase
+    { {{#operation}}
+        private readonly I{{classname}}Handler _handler;
+        
+        public {{classname}}Controller(I{{classname}}Handler handler)
+        {
+            _handler = handler;
+        }
+
+        /// <summary>
+        /// {{summary}}
+        /// </summary>{{#notes}}
+        /// <remarks>{{.}}</remarks>{{/notes}}{{#allParams}}
+        /// <param name="{{paramName}}">{{description}}{{#isDeprecated}} (deprecated){{/isDeprecated}}</param>{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}
+        /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>{{/operationIsAsync}}{{/operationResultTask}}{{#responses}}
+        /// <response code="{{code}}">{{message}}</response>{{/responses}}
+        [{{httpMethod}}]
+        [Route("{{{basePathWithoutHost}}}{{{path}}}")]
+{{#authMethods}}
+{{#isApiKey}}
+        [Authorize(Policy = "{{name}}")]
+{{/isApiKey}}
+{{#isBasicBearer}}
+        [Authorize{{#scopes}}{{#-first}}(Roles = "{{/-first}}{{scope}}{{^-last}},{{/-last}}{{#-last}}"){{/-last}}{{/scopes}}]
+{{/isBasicBearer}}
+{{/authMethods}}
+        {{#vendorExtensions.x-aspnetcore-consumes}}
+        [Consumes({{&vendorExtensions.x-aspnetcore-consumes}})]
+        {{/vendorExtensions.x-aspnetcore-consumes}}
+        [ValidateModelState]{{#useSwashbuckle}}
+        [SwaggerOperation("{{operationId}}")]{{#responses}}{{#dataType}}
+        [SwaggerResponse(statusCode: {{code}}, type: typeof({{&dataType}}), description: "{{message}}")]{{/dataType}}{{/responses}}{{/useSwashbuckle}}{{^useSwashbuckle}}{{#responses}}{{#dataType}}
+        [ProducesResponseType(statusCode: {{code}}, type: typeof({{&dataType}}))]{{/dataType}}{{/responses}}{{/useSwashbuckle}}
+        {{#isDeprecated}}
+        [Obsolete]
+        {{/isDeprecated}}
+        public {{operationModifier}} {{#operationResultTask}}{{#operationIsAsync}}async {{/operationIsAsync}}Task<{{/operationResultTask}}IActionResult{{#operationResultTask}}>{{/operationResultTask}} {{operationId}}({{#allParams}}{{>pathParam}}{{>queryParam}}{{>bodyParam}}{{>formParam}}{{>headerParam}}{{^-last}}{{^isCookieParam}}, {{/isCookieParam}}{{/-last}}{{#-last}}{{#operationResultTask}}{{#operationIsAsync}}, {{/operationIsAsync}}{{/operationResultTask}}{{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}CancellationToken cancellationToken{{/operationIsAsync}}{{/operationResultTask}}){{^generateBody}};{{/generateBody}}
+        {{#generateBody}}
+        {
+            return _handler.{{operationId}}({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}, cancellationToken{{/operationIsAsync}}{{/operationResultTask}});
+        }
+        {{/generateBody}}
+        {{/operation}}
+    }
+{{/operations}}
+}
