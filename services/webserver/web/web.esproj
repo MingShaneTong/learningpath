@@ -11,7 +11,4 @@
   <ItemGroup>
     <Folder Include="src\clients\" />
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="openapi-generator-cli generate -i ./contracts/gateway.api.yaml -g typescript-node -o ./src/clients/gateway --additional-properties=generateSourceCodeOnly=true" />
-  </Target>
 </Project>
