@@ -1,0 +1,1 @@
+openapi-generator-cli generate -i ./web/contracts/gateway.api.yaml -g typescript-fetch -o ./web/src/clients/gateway --additional-properties=generateSourceCodeOnly=true,typescriptThreePlus=true

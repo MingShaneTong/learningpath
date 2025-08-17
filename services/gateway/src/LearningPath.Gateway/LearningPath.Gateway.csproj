@@ -27,9 +27,4 @@
   <ItemGroup>
     <OpenApiReference Include=".\Contracts\dag.api.yaml" Namespace="LearningPath.Gateway.Dag" ClassName="DagClient" />
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="openapi-generator-cli generate -i ./Contracts/gateway.api.yaml -g aspnetcore -o ../ -t ./Templates/aspnetcore --global-property apis,models,attributes,apiDocs=false,apiTests=false,modelDocs=false,modelTests=false --additional-properties=packageName=LearningPath.Gateway,generateSourceCodeOnly=true" />
-  </Target>
-
 </Project>

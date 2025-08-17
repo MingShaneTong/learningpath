@@ -1,0 +1,1 @@
+openapi-generator-cli generate -i ./src/LearningPath.Gateway/Contracts/gateway.api.yaml -g aspnetcore -t ./src/LearningPath.Gateway/Templates/aspnetcore --global-property apis,models,attributes,apiDocs=false,apiTests=false,modelDocs=false,modelTests=false --additional-properties=packageName=LearningPath.Gateway,generateSourceCodeOnly=true
