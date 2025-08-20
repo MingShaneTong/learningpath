@@ -22,5 +22,3 @@ Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "
 
 "Distributing Contracts to DAG Service"
 Copy-ItemEnsuringDirectory -Source "./contracts/dag.api.yaml" -Destination "./services/dag/contracts/dag.api.yaml"
-
-pause

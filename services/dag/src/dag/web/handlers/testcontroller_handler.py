@@ -1,2 +1,2 @@
-def test_get():
+def get():
     return "Hello, World!"
