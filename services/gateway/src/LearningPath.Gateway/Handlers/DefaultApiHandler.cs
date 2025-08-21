@@ -1,19 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LearningPath.Gateway.Client.Dag.Api;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LearningPath.Gateway.Handlers
 {
 	public interface IDefaultApiHandler
 	{
-		public IActionResult PingGet();
+		public Task<IActionResult> PingGet();
 	}
 
 	public class DefaultApiHandler : IDefaultApiHandler
 	{
-		public IActionResult PingGet()
-		{
-			// This method is intentionally left empty.
-			// It serves as a placeholder for the default API handler.
-			return null;
-		}
+        private readonly IDefaultApi _dagApi;
+
+        public DefaultApiHandler(IDefaultApi dagApi)
+        {
+            _dagApi = dagApi;
+        }
+
+        public async Task<IActionResult> PingGet()
+        {
+            var response = await _dagApi.TestGetAsync();
+            if (response.IsOk)
+                return new OkResult();
+            return new StatusCodeResult((int)response.StatusCode);
+        }
 	}
 }

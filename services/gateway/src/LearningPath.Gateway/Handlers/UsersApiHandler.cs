@@ -5,12 +5,12 @@ namespace LearningPath.Gateway.Handlers
 {
 	public interface IUsersApiHandler
 	{
-		public IActionResult UsersGet(int? limit, bool? active);
+		public Task<IActionResult> UsersGet(int? limit, bool? active);
 	}
 
 	public class UsersApiHandler : IUsersApiHandler
 	{
-		public IActionResult UsersGet(int? limit, bool? active)
+		public Task<IActionResult> UsersGet(int? limit, bool? active)
 		{
 			return null;
 		}

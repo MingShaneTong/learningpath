@@ -27,4 +27,8 @@
   <ItemGroup>
     <OpenApiReference Include=".\Contracts\dag.api.yaml" Namespace="LearningPath.Gateway.Dag" ClassName="DagClient" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LearningPath.Gateway.Client.Dag\src\LearningPath.Gateway.Client.Dag\LearningPath.Gateway.Client.Dag.csproj" />
+  </ItemGroup>
 </Project>

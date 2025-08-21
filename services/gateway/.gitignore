@@ -60,3 +60,4 @@ nunit-*.xml
 Controllers
 Models
 Contracts
+LearningPath.Gateway.Client.Dag
