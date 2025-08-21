@@ -11,7 +11,7 @@ from {{packageName}}.handlers import {{#lambda.lowercase}}{{classname}}{{/lambda
 {{#operation}}
 
 
-def {{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):  # noqa: E501
+def {{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):  # noqa: E501
     """{{summary}}{{^summary}}{{operationId}}{{/summary}}
 
     {{notes}} # noqa: E501
