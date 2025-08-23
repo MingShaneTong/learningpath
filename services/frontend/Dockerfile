@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY ./ ./
+COPY ./src ./
 
 WORKDIR /app/clients/gateway
 RUN npm install typescript
