@@ -1,0 +1,14 @@
+{
+  "name": "@learningpath/client-gateway-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc --outDir ./dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "typescript": "^5.9.2"
+  }
+}

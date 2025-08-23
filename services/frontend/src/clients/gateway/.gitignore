@@ -1,0 +1,12 @@
+.openapi-generator/
+apis/
+models/
+node_modules/
+
+.openapi-generator-ignore
+index.ts
+runtime.ts
+
+# output
+dist/
+!dist/package.json
