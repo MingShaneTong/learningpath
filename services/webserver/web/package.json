@@ -5,19 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build-api": "openapi-generator-cli generate -i ./contracts/gateway.api.yaml -g typescript-fetch -o ./src/clients/gateway --additional-properties=generateSourceCodeOnly=true,typescriptThreePlus=true",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@learningpath/client-gateway": "file:../clients/gateway/dist",
     "@types/request": "^2.48.13",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/express": "^5.0.3",
+    "@types/http-proxy-middleware": "^1.0.0",
     "@types/node": "^20.11.30",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

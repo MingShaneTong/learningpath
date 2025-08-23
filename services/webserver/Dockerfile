@@ -2,14 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY web/package*.json ./
+COPY ./ ./
 
+WORKDIR /app/clients/gateway
+RUN npm install typescript
+RUN npx tsc --outDir ./dist
+
+WORKDIR /app/web
 RUN npm install
-
-COPY web/ ./
-
 RUN npm run build
+RUN npx tsc server.ts --outDir dist
 
 EXPOSE 8081
 
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "8081"]
+CMD ["node", "dist/server.js"]

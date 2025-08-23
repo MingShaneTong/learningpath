@@ -1,1 +1,5 @@
-openapi-generator-cli generate -i ./web/contracts/gateway.api.yaml -g typescript-fetch -o ./web/src/clients/gateway --additional-properties=generateSourceCodeOnly=true,typescriptThreePlus=true
+openapi-generator-cli generate  `
+    -i ./contracts/gateway.api.yaml `
+    -g typescript-fetch `
+    -o ./clients/gateway `
+    --additional-properties=projectName=@learningpath/client-gateway

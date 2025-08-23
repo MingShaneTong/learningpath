@@ -8,8 +8,11 @@ services:
     container_name: webserver-service
     ports:
       - "8080:8081"
+    environment:
+      - GATEWAY_URL=http://gateway:8080
+      - PORT=8081
     networks:
-      - microservices-network
+      - frontend-network
 
   dag:
     build:
@@ -35,10 +38,13 @@ services:
       - DagClient__BaseUrl=http://dag:8080
     networks:
       - microservices-network
+      - frontend-network
     depends_on:
       - dag
       - webserver
 
 networks:
+  frontend-network:
+    driver: bridge
   microservices-network:
     driver: bridge
