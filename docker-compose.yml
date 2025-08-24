@@ -1,17 +1,31 @@
 version: '3.8'
 
 services:
-  webserver-service:
+  proxy:
     build:
-      context: ./services/webserver
+      context: ./services/proxy
       dockerfile: Dockerfile
-    container_name: webserver-service
+    container_name: proxy-service
     ports:
-      - "8080:8081"
+      - "80:80"
     networks:
-      - microservices-network
+      - gateway-bridge
+      - frontend-bridge
+    depends_on:
+      - frontend
+      - gateway
 
-  dag-service:
+  frontend:
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile
+    container_name: frontend-service
+    ports:
+      - "8080:3000"
+    networks:
+      - frontend-bridge
+
+  dag:
     build:
       context: ./services/dag
       dockerfile: Dockerfile
@@ -24,19 +38,26 @@ services:
     networks:
       - microservices-network
 
-  gateway-service:
+  gateway:
     build:
       context: ./services/gateway
       dockerfile: Dockerfile
     container_name: gateway-service
     ports:
       - "8081:8080"
+    environment:
+      - DagClient__BaseUrl=http://dag:8080
     networks:
+      - gateway-bridge
       - microservices-network
     depends_on:
-      - dag-service
-      - webserver-service
+      - dag
+      - frontend
 
 networks:
+  frontend-bridge:
+    driver: bridge
+  gateway-bridge:
+    driver: bridge
   microservices-network:
     driver: bridge

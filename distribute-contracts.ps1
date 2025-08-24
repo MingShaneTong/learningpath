@@ -18,7 +18,7 @@ Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "
 Copy-ItemEnsuringDirectory -Source "./contracts/dag.api.yaml" -Destination "./services/gateway/src/LearningPath.Gateway/Contracts/dag.api.yaml"
 
 "Distributing Contracts to Web Service"
-Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "./services/webserver/web/contracts/gateway.api.yaml"
+Copy-ItemEnsuringDirectory -Source "./contracts/gateway.api.yaml" -Destination "./services/frontend/contracts/gateway.api.yaml"
 
 "Distributing Contracts to DAG Service"
 Copy-ItemEnsuringDirectory -Source "./contracts/dag.api.yaml" -Destination "./services/dag/contracts/dag.api.yaml"

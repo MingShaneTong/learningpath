@@ -10,7 +10,7 @@ Get-Location
 ./build.ps1
 Pop-Location
 
-Push-Location ./services/webserver
+Push-Location ./services/frontend
 Get-Location
 ./build.ps1
 Pop-Location

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPath.Gateway", "src\LearningPath.Gateway\LearningPath.Gateway.csproj", "{DFA7B778-CEF3-4E43-8AD6-957305A3843E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPath.Gateway.Client.Dag", "src\LearningPath.Gateway.Client.Dag\src\LearningPath.Gateway.Client.Dag\LearningPath.Gateway.Client.Dag.csproj", "{39597409-84AE-370D-8CE4-239FE3B1B101}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DFA7B778-CEF3-4E43-8AD6-957305A3843E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA7B778-CEF3-4E43-8AD6-957305A3843E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA7B778-CEF3-4E43-8AD6-957305A3843E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39597409-84AE-370D-8CE4-239FE3B1B101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39597409-84AE-370D-8CE4-239FE3B1B101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39597409-84AE-370D-8CE4-239FE3B1B101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39597409-84AE-370D-8CE4-239FE3B1B101}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

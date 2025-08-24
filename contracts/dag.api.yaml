@@ -3,7 +3,7 @@ info:
   title: Learning Path DAG Api
   version: '1.0'
 servers:
-  - url: https://api.server.test/v1
+  - url: http://dag:8080
 paths:
   /test:
     get:

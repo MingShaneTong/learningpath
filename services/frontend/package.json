@@ -1,0 +1,14 @@
+{
+  "name": "@learningpath/frontend",
+  "private": true,
+  "workspaces": [
+    "src/ui",
+    "src/clients/gateway"
+  ],
+  "scripts": {
+    "build:gateway": "npm run build -w @learningpath/client-gateway",
+    "build:ui": "npm run build -w @learningpath/ui",
+    "build": "npm run build:gateway && npm run build:ui",
+    "dev": "npm run dev -w @learningpath/ui"
+  }
+}

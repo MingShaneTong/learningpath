@@ -113,6 +113,6 @@ def {{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^is
             {{/items}}
         {{/isMap}}
     {{/allParams}}
-    return handler.{{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
+    return handler.{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
 {{/operation}}
 {{/operations}}
