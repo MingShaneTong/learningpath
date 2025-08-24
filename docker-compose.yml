@@ -9,7 +9,8 @@ services:
     ports:
       - "80:80"
     networks:
-      - microservices-network
+      - gateway-bridge
+      - frontend-bridge
     depends_on:
       - frontend
       - gateway
@@ -20,7 +21,9 @@ services:
       dockerfile: Dockerfile
     container_name: frontend-service
     ports:
-      - "80:80"
+      - "8080:3000"
+    networks:
+      - frontend-bridge
 
   dag:
     build:
@@ -45,11 +48,16 @@ services:
     environment:
       - DagClient__BaseUrl=http://dag:8080
     networks:
+      - gateway-bridge
       - microservices-network
     depends_on:
       - dag
-      - webserver
+      - frontend
 
 networks:
+  frontend-bridge:
+    driver: bridge
+  gateway-bridge:
+    driver: bridge
   microservices-network:
     driver: bridge

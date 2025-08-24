@@ -1,7 +1,7 @@
 {
-  "name": "@learningpath/client-gateway-ts",
+  "name": "@learningpath/client-gateway",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "npx tsc --outDir ./dist"
   },

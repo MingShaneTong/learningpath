@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      target: debug
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+    ports:
+      - "8081:8080"
+      - "2222:2222"  # Debug port
+
+  frontend:
+    build:
+      target: debug
+    environment:
+      - NODE_ENV=development
+    command: npm run dev  # Run in dev mode with hot reloading
+
+  dag:
+    build:
+      target: debug
+    volumes:
+      - ./services/dag/src:/usr/src/app/src  # Mount source code for hot reload

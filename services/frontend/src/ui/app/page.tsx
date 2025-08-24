@@ -1,6 +1,25 @@
+"use client"
 import Image from "next/image";
+import { DefaultApi, Configuration } from "@learningpath/client-gateway";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [pingResult, setPingResult] = useState<string>("Loading...");
+
+  useEffect(() => {
+    const config = new Configuration({
+      basePath: "/api"
+    });
+    const api = new DefaultApi(config);
+    api.pingGet()
+      .then(response => {
+        setPingResult("Ping successful: " + JSON.stringify(response));
+      })
+      .catch(error => {
+        setPingResult("Ping failed: " + error.message);
+      });
+  }, []);
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -24,6 +43,11 @@ export default function Home() {
             Save and see your changes instantly.
           </li>
         </ol>
+
+        <div className="bg-black/[.05] dark:bg-white/[.06] font-mono p-4 rounded w-full">
+          <h2 className="font-bold mb-2">API Test Result:</h2>
+          <p className="break-words">{pingResult}</p>
+        </div>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
