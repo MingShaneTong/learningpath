@@ -10,6 +10,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+# Generated API contracts
+**/Contracts/*.yaml
+**/Contracts/*.yml
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
