@@ -15,22 +15,34 @@ This project is built as a modern microservices-based web application. The main 
 ### Directory Layout
 
 - `services/gateway/` - API Gateway (.NET, C#)
-- `services/webserver/` - Web frontend (Node.js, React/Vite)
+- `services/frontend/` - Next.js frontend application
+  - `src/ui/` - Main Next.js application
+  - `src/clients/gateway/` - Generated TypeScript client for gateway API
 - `services/dag/` - DAG logic service (Python, Connexion/Flask)
+- `services/proxy/` - Nginx reverse proxy for routing requests
 - `contracts/` - Centralized OpenAPI YAML contracts shared across services
-- `build.ps1` - PowerShell script to build/generate all services
-- `docker-compose.yml` - Orchestrates all services in Docker containers
+  - `dag.api.yaml` - DAG service API contract
+  - `gateway.api.yaml` - Gateway API contract
+- `build.ps1` - PowerShell script to build all services
+- `distribute-contracts.ps1` - Script to distribute and generate code from API contracts
+- `docker-compose.yml` - Base Docker configuration
+- `docker-compose.debug.yml` - Debug environment configuration
+- `docker-compose.release.yml` - Production environment configuration
+- `docker-compose.ps1` - Script to manage Docker environments
 
 
 ## Project Status
 
 **Completed:**
-- Created three core microservices (gateway, webserver, dag)
+
+- Created three core microservices (gateway, frontend, dag)
+- Set up Nginx reverse proxy for routing requests
 - Centralized API contracts using OpenAPI Generator to generate controllers and models for each service
 - Containerized all services using Docker for easy deployment and development
+- Implemented multi-stage Docker builds for debug and release environments
 
 **In Progress / To Do:**
-- Ensure Docker containers communicate correctly in all environments
+
 - Create and edit the first DAG from the frontend
 - Add an OIDC authentication service (e.g., Keycloak)
 - Implement user permissioned DAGs (private/public sharing)
@@ -39,23 +51,31 @@ This project is built as a modern microservices-based web application. The main 
 ## Build & Run Instructions
 
 1. **Build all services and generate code:**
-	```
-	./build.ps1
-	```
-2. **Build and start all Docker containers:**
-	```
-	docker-compose build
-	docker-compose up
-	```
-3. Access the web frontend at the port specified in `docker-compose.yml` (e.g., http://localhost:8080 or http://localhost:8081)
+
+```powershell
+./build.ps1
+```
+
+1. **Build and start all Docker containers:**
+
+```bash
+# For development
+./docker-compose.ps1 debug
+
+# For production
+./docker-compose.ps1 release
+```
+
+1. Access the web frontend at `http://localhost:3000` (development) or `http://localhost:80` (production)
 
 ## Technologies Used
 
 - .NET (C#) for API Gateway
-- Node.js, React, Vite for frontend
+- Next.js for frontend
 - Python (Connexion/Flask) for DAG service
 - OpenAPI/Swagger for API contracts
 - Docker & Docker Compose for containerization
+- Nginx for reverse proxy
 
 ## Contributing
 
