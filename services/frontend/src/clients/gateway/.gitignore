@@ -8,5 +8,5 @@ index.ts
 runtime.ts
 
 # output
-dist/
+dist/*
 !dist/package.json
