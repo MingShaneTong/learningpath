@@ -16,8 +16,7 @@ function Divider() {
       top: 0,
       bottom: 0,
       width: "4px",
-      background: "#ccc",
-      cursor: "col-resize"
+      background: "#ccc"
     }} />
   );
 }
