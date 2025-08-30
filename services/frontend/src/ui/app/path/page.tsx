@@ -3,8 +3,55 @@ import { useCallback, useEffect, useState } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 
+enum ColumnType {
+  Main = "main-column",
+  Second = "second-column"
+}
+
+function Divider() {
+  return (
+    <div style={{
+      position: "absolute",
+      right: 0,
+      top: 0,
+      bottom: 0,
+      width: "4px",
+      background: "#ccc",
+      cursor: "col-resize"
+    }} />
+  );
+}
+
+function ColumnGrid({ children, layout, windowSize, onLayoutChange, resizeHandles }: {
+  children: React.ReactNode;
+  layout: Layout[];
+  windowSize: { width: number; height: number };
+  onLayoutChange: (layout: Layout[]) => void;
+  resizeHandles?: ("n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw")[];
+}) {
+  return (
+    <GridLayout
+      layout={layout}
+      cols={12}
+      rowHeight={windowSize.height / 12}
+      width={windowSize.width}
+      margin={[0, 0]}
+      containerPadding={[0, 0]}
+      onLayoutChange={onLayoutChange}
+      isDraggable={false}
+      isResizable={true}
+      resizeHandles={resizeHandles}
+      onResizeStart={(layout, oldItem, newItem, placeholder, e, element) => {
+        return oldItem.i === ColumnType.Main;
+      }}
+    >
+      {children}
+    </GridLayout>
+  );
+}
+
 export default function Path() {
-  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
+  const [windowSize, setWindowSize] = useState<{ width: number; height: number }>();
   const [showSecondColumn, setShowSecondColumn] = useState(false);
   const [mainColumnWidth, setMainColumnWidth] = useState(8);
 
@@ -17,7 +64,7 @@ export default function Path() {
       });
     }
     
-    handleResize(); // Initial size
+    handleResize(); 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -26,7 +73,7 @@ export default function Path() {
   const onLayoutChange = useCallback((layout: Layout[]) => {
     if (layout.length < 2) return;
     
-    const mainColumn = layout.find(item => item.i === "main-column");
+    const mainColumn = layout.find(item => item.i === ColumnType.Main);
     if (mainColumn) {
       setMainColumnWidth(mainColumn.w);
     }
@@ -35,7 +82,7 @@ export default function Path() {
   // Calculate layout based on window size and column visibility
   const getLayout = useCallback((): Layout[] => {
     const mainColumn = {
-      i: "main-column",
+      i: ColumnType.Main,
       x: 0,
       y: 0,
       w: showSecondColumn ? mainColumnWidth : 12,
@@ -45,7 +92,7 @@ export default function Path() {
     };
 
     const secondColumn = {
-      i: "second-column",
+      i: ColumnType.Second,
       x: mainColumnWidth,
       y: 0,
       w: 12 - mainColumnWidth,
@@ -56,25 +103,17 @@ export default function Path() {
     return showSecondColumn ? [mainColumn, secondColumn] : [mainColumn];
   }, [showSecondColumn, mainColumnWidth]);
 
+  if (!windowSize) return null; 
+
   return (
     <main style={{ height: "100vh", width: "100vw", overflow: "hidden" }}>
-      <GridLayout
-        layout={getLayout()}
-        cols={12}
-        rowHeight={windowSize.height / 12}
-        width={windowSize.width}
-        margin={[0, 0]}
-        containerPadding={[0, 0]}
+      <ColumnGrid 
+        layout={getLayout()} 
+        windowSize={windowSize!} 
         onLayoutChange={onLayoutChange}
-        isDraggable={false}
-        isResizable={true}
-        resizeHandles={["e"]}
-        onResizeStart={(layout, oldItem, newItem, placeholder, e, element) => {
-          // Only allow resizing the main column
-          return oldItem.i === "main-column";
-        }}
+        resizeHandles={showSecondColumn ? ["e"] : undefined}
       >
-        <div key="main-column" style={{ 
+        <div key={ColumnType.Main} style={{ 
           background: "#f0f0f0",
           width: "100%",
           height: "100%",
@@ -85,20 +124,10 @@ export default function Path() {
           <button onClick={() => setShowSecondColumn(!showSecondColumn)}>
             {showSecondColumn ? "Hide" : "Show"} Second Column
           </button>
-          {showSecondColumn && (
-            <div style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: "4px",
-              background: "#ccc",
-              cursor: "col-resize"
-            }} />
-          )}
+          {showSecondColumn && <Divider />}
         </div>
         {showSecondColumn && (
-          <div key="second-column" style={{
+          <div key={ColumnType.Second} style={{
             background: "#e0e0e0",
             width: "100%",
             height: "100%",
@@ -110,7 +139,7 @@ export default function Path() {
             </button>
           </div>
         )}
-      </GridLayout>
+      </ColumnGrid>
     </main>
   );
 }
