@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
+import "./page.css"
 
 enum ColumnType {
   Main = "main-column",

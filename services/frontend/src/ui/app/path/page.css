@@ -1,0 +1,11 @@
+.react-resizable-handle-e {
+  height: 100% !important;
+  width: 4px !important;
+  top: 0 !important;
+  margin: 0;
+  transform: rotate(0) !important;
+}
+
+.react-resizable-handle-e:after {
+  content: none !important;
+}
