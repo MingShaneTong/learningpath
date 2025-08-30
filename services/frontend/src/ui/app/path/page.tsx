@@ -1,6 +1,9 @@
 "use client"
 import { useCallback, useEffect, useState } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
+import DagPanel from "./DagPanel";
+import NotesPanel from "./NotesPanel";
+
 import "react-grid-layout/css/styles.css";
 import "./page.css"
 
@@ -120,18 +123,12 @@ export default function Path() {
         resizeHandles={showSecondColumn ? ["e"] : undefined}
       >
         <div key={ColumnType.Main} style={columnStyle}>
-          <h2>Main Content</h2>
-          <button onClick={() => setShowSecondColumn(!showSecondColumn)}>
-            {showSecondColumn ? "Hide" : "Show"} Second Column
-          </button>
+          <DagPanel openFunction={() => setShowSecondColumn(true)} />
           {showSecondColumn && <Divider />}
         </div>
         {showSecondColumn && (
           <div key={ColumnType.Second} style={columnStyle}>
-            <h2>Second Column</h2>
-            <button onClick={() => setShowSecondColumn(false)}>
-              Close
-            </button>
+            <NotesPanel closeFunction={() => setShowSecondColumn(false)} />
           </div>
         )}
       </ColumnGrid>
