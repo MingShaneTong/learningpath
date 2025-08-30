@@ -103,6 +103,12 @@ export default function Path() {
     return showSecondColumn ? [mainColumn, secondColumn] : [mainColumn];
   }, [showSecondColumn, mainColumnWidth]);
 
+  const columnStyle = {
+    width: "100%",
+    height: "100%",
+    padding: "20px"
+  };
+
   if (!windowSize) return null; 
 
   return (
@@ -113,13 +119,7 @@ export default function Path() {
         onLayoutChange={onLayoutChange}
         resizeHandles={showSecondColumn ? ["e"] : undefined}
       >
-        <div key={ColumnType.Main} style={{ 
-          background: "#f0f0f0",
-          width: "100%",
-          height: "100%",
-          padding: "20px",
-          position: "relative"
-        }}>
+        <div key={ColumnType.Main} style={columnStyle}>
           <h2>Main Content</h2>
           <button onClick={() => setShowSecondColumn(!showSecondColumn)}>
             {showSecondColumn ? "Hide" : "Show"} Second Column
@@ -127,12 +127,7 @@ export default function Path() {
           {showSecondColumn && <Divider />}
         </div>
         {showSecondColumn && (
-          <div key={ColumnType.Second} style={{
-            background: "#e0e0e0",
-            width: "100%",
-            height: "100%",
-            padding: "20px"
-          }}>
+          <div key={ColumnType.Second} style={columnStyle}>
             <h2>Second Column</h2>
             <button onClick={() => setShowSecondColumn(false)}>
               Close
