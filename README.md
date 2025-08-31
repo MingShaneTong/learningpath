@@ -40,10 +40,10 @@ This project is built as a modern microservices-based web application. The main 
 - Centralized API contracts using OpenAPI Generator to generate controllers and models for each service
 - Containerized all services using Docker for easy deployment and development
 - Implemented multi-stage Docker builds for debug and release environments
+- Create and edit the first DAG from the frontend
 
 **In Progress / To Do:**
 
-- Create and edit the first DAG from the frontend
 - Add an OIDC authentication service (e.g., Keycloak)
 - Implement user permissioned DAGs (private/public sharing)
 - Integrate AI to generate DAGs using the ultralearning questions and planning framework
