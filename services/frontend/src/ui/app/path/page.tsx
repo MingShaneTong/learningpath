@@ -135,7 +135,7 @@ export default function Path() {
     <main style={{ height: "100vh", width: "100vw", overflow: "hidden" }}>
       <ColumnGrid 
         layout={getLayout()} 
-        windowSize={windowSize!} 
+        windowSize={windowSize} 
         onLayoutChange={onLayoutChange}
         resizeHandles={showSecondColumn ? ["e"] : undefined}
       >
