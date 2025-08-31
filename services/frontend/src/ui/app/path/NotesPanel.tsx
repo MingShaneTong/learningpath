@@ -24,9 +24,9 @@ export default function NotesPanel({ closeFunction }: NotesPanelProps) {
       </button>
       
       <Button
-        // isIconOnly
-        className="absolute top-0 right-0 size-16"
-        // radius="full"
+        isIconOnly
+        className="absolute top-0 right-0 size-6 mt-4 mr-4"
+        radius="full"
         onPress={closeFunction}
       >
         <CrossIcon />
