@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import cytoscape from "cytoscape";
+import cytoscape, { ElementDefinition } from "cytoscape";
 import { DagData } from "@learningpath/client-gateway";
 
 interface DagPanelProps {
@@ -15,7 +15,7 @@ export default function DagPanel({ openFunction, dag }: DagPanelProps) {
 
     const cy = cytoscape({
       container: cyRef.current,
-      elements: dag.elements,
+      elements: dag.elements as ElementDefinition[],
       style: [
         {
           selector: 'node',

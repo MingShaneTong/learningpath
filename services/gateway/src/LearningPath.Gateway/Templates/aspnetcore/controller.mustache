@@ -22,7 +22,7 @@ using System.Text.Json;
 {{/useNewtonsoft}}
 {{/isLibrary}}
 using {{packageName}}.Attributes;
-using {{packageName}}.Handlers;
+using {{packageName}}.Services;
 using {{modelPackage}};
 
 namespace {{apiPackage}}
@@ -34,11 +34,11 @@ namespace {{apiPackage}}
     [ApiController]
     public {{#classModifier}}{{.}} {{/classModifier}}class {{classname}}Controller : ControllerBase
     { {{#operation}}
-        private readonly I{{classname}}Handler _handler;
+        private readonly I{{classname}}Service _service;
         
-        public {{classname}}Controller(I{{classname}}Handler handler)
+        public {{classname}}Controller(I{{classname}}Service service)
         {
-            _handler = handler;
+            _service = service;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace {{apiPackage}}
         public {{operationModifier}} async Task<IActionResult> {{operationId}}({{#allParams}}{{>pathParam}}{{>queryParam}}{{>bodyParam}}{{>formParam}}{{>headerParam}}{{^-last}}{{^isCookieParam}}, {{/isCookieParam}}{{/-last}}{{#-last}}{{#operationResultTask}}{{#operationIsAsync}}, {{/operationIsAsync}}{{/operationResultTask}}{{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}CancellationToken cancellationToken{{/operationIsAsync}}{{/operationResultTask}}){{^generateBody}};{{/generateBody}}
         {{#generateBody}}
         {
-            return await _handler.{{operationId}}({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}, cancellationToken{{/operationIsAsync}}{{/operationResultTask}});
+            return await _service.{{operationId}}({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#operationResultTask}}{{#operationIsAsync}}, cancellationToken{{/operationIsAsync}}{{/operationResultTask}});
         }
         {{/generateBody}}
         {{/operation}}

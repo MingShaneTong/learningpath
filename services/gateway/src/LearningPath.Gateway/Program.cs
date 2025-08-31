@@ -1,4 +1,4 @@
-using LearningPath.Gateway.Handlers;
+using LearningPath.Gateway.Services;
 using LearningPath.Gateway.Client.Dag.Client;
 using LearningPath.Gateway.Client.Dag.Extensions;
 using Microsoft.AspNetCore.OpenApi;
@@ -14,8 +14,8 @@ builder.Services.AddApi(config => {
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IDefaultApiHandler, DefaultApiHandler>();
-builder.Services.AddScoped<IDagApiHandler, DagApiHandler>();
+builder.Services.AddScoped<IDefaultApiService, DefaultApiService>();
+builder.Services.AddScoped<IDagApiService, DagApiService>();
 
 var app = builder.Build();
 
