@@ -15,7 +15,7 @@ export default function DagPanel({ openFunction, dag }: DagPanelProps) {
 
     const cy = cytoscape({
       container: cyRef.current,
-      elements: JSON.parse(JSON.stringify(dag.elements)),
+      elements: dag.elements,
       style: [
         {
           selector: 'node',
