@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroui/react": "^2.8.2",
     "@learningpath/client-gateway": "file:../clients/gateway/dist",
+    "cytoscape": "^3.33.1",
     "framer-motion": "^12.23.12",
     "next": "15.5.0",
     "react": "19.1.0",

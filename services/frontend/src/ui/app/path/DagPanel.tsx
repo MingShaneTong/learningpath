@@ -1,14 +1,61 @@
+import React, { useEffect, useRef } from "react";
+import cytoscape from "cytoscape";
+
+// Example: import your data from an external file
+import dagData from "./dagData.json";
+
 interface DagPanelProps {
   openFunction: () => void;
 }
 
 export default function DagPanel({ openFunction }: DagPanelProps) {
+  const cyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!cyRef.current) return;
+    const cy = cytoscape({
+      container: cyRef.current,
+      elements: dagData.elements,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'background-color': '#0074D9',
+            'label': 'data(label)',
+            'color': '#fff',
+            'text-valign': 'center',
+            'text-halign': 'center',
+            'font-size': 16
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 3,
+            'line-color': '#ccc',
+            'target-arrow-color': '#ccc',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier'
+          }
+        }
+      ],
+      layout: {
+        name: 'breadthfirst',
+        directed: true,
+        padding: 10,
+        direction: 'rightward',
+        spacingFactor: 1.5
+      }
+    });
+    return () => cy.destroy();
+  }, []);
+
   return (
-    <div className="dag-panel">
-        <h2>Main Content</h2>
-        <button onClick={openFunction}>
-          Toggle Second Column
-        </button>
+    <div style={{ width: "100%", height: 400, position: "relative" }}>
+      <div ref={cyRef} style={{ width: "100%", height: "100%" }} />
+      <button onClick={openFunction} style={{ position: "absolute", top: 10, right: 10 }}>
+        Toggle Second Column
+      </button>
     </div>
   );
 }
