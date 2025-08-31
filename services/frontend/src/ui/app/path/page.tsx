@@ -140,7 +140,7 @@ export default function Path() {
         resizeHandles={showSecondColumn ? ["e"] : undefined}
       >
         <div key={ColumnType.Main} style={columnStyle}>
-          <DagPanel openFunction={() => setShowSecondColumn(true)} />
+          {dagResult ? <DagPanel dag={dagResult} openFunction={() => setShowSecondColumn(true)} /> : <div>Loading...</div>}
           {showSecondColumn && <Divider />}
         </div>
         {showSecondColumn && (

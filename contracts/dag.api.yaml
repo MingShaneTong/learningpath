@@ -12,7 +12,6 @@ paths:
           description: OK
   /dag:
     get:
-      operationId: get_dag
       summary: Get all DAG elements
       description: Retrieves a list of all DAG elements
       tags:

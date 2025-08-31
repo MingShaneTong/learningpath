@@ -1,21 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import cytoscape from "cytoscape";
-
-// Example: import your data from an external file
-import dagData from "./dagData.json";
+import { DagData } from "@learningpath/client-gateway";
 
 interface DagPanelProps {
   openFunction: () => void;
+  dag: DagData;
 }
 
-export default function DagPanel({ openFunction }: DagPanelProps) {
+export default function DagPanel({ openFunction, dag }: DagPanelProps) {
   const cyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!cyRef.current) return;
+
     const cy = cytoscape({
       container: cyRef.current,
-      elements: dagData.elements,
+      elements: JSON.parse(JSON.stringify(dag.elements)),
       style: [
         {
           selector: 'node',
@@ -51,7 +51,7 @@ export default function DagPanel({ openFunction }: DagPanelProps) {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: 400, position: "relative" }}>
+    <div style={{ width: "100%", height: "100%", position: "relative" }}>
       <div ref={cyRef} style={{ width: "100%", height: "100%" }} />
       <button onClick={openFunction} style={{ position: "absolute", top: 10, right: 10 }}>
         Toggle Second Column

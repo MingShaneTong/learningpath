@@ -10,16 +10,16 @@ namespace LearningPath.Gateway.Handlers
 
 	public class DefaultApiHandler : IDefaultApiHandler
 	{
-        private readonly IDefaultApi _dagApi;
+        private readonly IDefaultApi _defaultApi;
 
-        public DefaultApiHandler(IDefaultApi dagApi)
+        public DefaultApiHandler(IDefaultApi defaultApi)
         {
-            _dagApi = dagApi;
+			_defaultApi = defaultApi;
         }
 
         public async Task<IActionResult> PingGet()
         {
-            var response = await _dagApi.TestGetAsync();
+            var response = await _defaultApi.TestGetAsync();
             if (response.IsOk)
                 return new OkResult();
             return new StatusCodeResult((int)response.StatusCode);
