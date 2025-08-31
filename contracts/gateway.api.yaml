@@ -10,68 +10,49 @@ paths:
       responses:
         '200':
           description: OK
-  /users:
+  /dag:
     get:
-      summary: Get all users
-      description: Retrieves a list of all users
+      summary: Get all DAG elements
+      description: Retrieves a list of all DAG elements
       tags:
-        - Users
+        - Dag
       parameters:
-        - name: limit
+        - name: dagid
           in: query
-          description: Maximum number of users to return
-          required: false
+          description: Unique identifier for the DAG
+          required: true
           schema:
             type: integer
-            minimum: 1
-            maximum: 100
-            default: 10
-        - name: active
-          in: query
-          description: Filter by active status
-          required: false
-          schema:
-            type: boolean
       responses:
         '200':
-          description: List of users retrieved successfully
+          description: Returns DAG elements for the specified ID
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/DagData'
         '400':
           description: Bad request - invalid parameters
 components:
   schemas:
-    User:
+    DagData:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the user
-          example: "123e4567-e89b-12d3-a456-426614174000"
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: "john.doe@example.com"
-        firstName:
-          type: string
-          description: User's first name
-          example: "John"
-        lastName:
-          type: string
-          description: User's last name
-          example: "Doe"
-        isActive:
-          type: boolean
-          description: Whether the user account is active
-          example: true
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: "2024-01-15T10:30:00Z"
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/DagElement'
+    DagElement:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+            source:
+              type: string
+            target:
+              type: string
+              

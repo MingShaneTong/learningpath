@@ -10,3 +10,48 @@ paths:
       responses:
         '200':
           description: OK
+  /dag:
+    get:
+      summary: Get all DAG elements
+      description: Retrieves a list of all DAG elements
+      tags:
+        - Dag
+      parameters:
+        - name: dagid
+          in: query
+          description: Unique identifier for the DAG
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Returns DAG elements for the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DagData'
+        '400':
+          description: Bad request - invalid parameters
+components:
+  schemas:
+    DagData:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/DagElement'
+    DagElement:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+            source:
+              type: string
+            target:
+              type: string

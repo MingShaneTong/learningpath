@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDefaultApiHandler, DefaultApiHandler>();
-builder.Services.AddScoped<IUsersApiHandler, UsersApiHandler>();
+builder.Services.AddScoped<IDagApiHandler, DagApiHandler>();
 
 var app = builder.Build();
 

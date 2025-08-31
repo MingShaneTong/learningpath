@@ -11,7 +11,7 @@ from {{packageName}}.handlers import {{#lambda.lowercase}}{{classname}}{{/lambda
 {{#operation}}
 
 
-def {{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):  # noqa: E501
+def {{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^required}}=None{{/required}}{{^-last}}, {{/-last}}{{/allParams}}):  # noqa: E501
     """{{summary}}{{^summary}}{{operationId}}{{/summary}}
 
     {{notes}} # noqa: E501
@@ -113,6 +113,6 @@ def {{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^is
             {{/items}}
         {{/isMap}}
     {{/allParams}}
-    return handler.{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
+    return handler.{{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
 {{/operation}}
 {{/operations}}
