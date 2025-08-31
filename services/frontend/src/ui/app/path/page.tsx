@@ -66,7 +66,7 @@ export default function Path() {
     });
     const api = new DagApi(config);
     api.dagGet({ dagid: 1 })
-      .then((response : DagData) => {
+      .then((response: DagData) => {
         console.log(response)
         setDagResult(response);
       })
