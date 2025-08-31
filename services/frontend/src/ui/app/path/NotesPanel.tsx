@@ -8,9 +8,6 @@ export const CrossIcon = ({
     </svg>
   );
 };
-
-
-
 interface NotesPanelProps {
   closeFunction: () => void;
 }
