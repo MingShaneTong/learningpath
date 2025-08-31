@@ -1,18 +1,18 @@
 ﻿using LearningPath.Gateway.Client.Dag.Api;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearningPath.Gateway.Handlers
+namespace LearningPath.Gateway.Services
 {
-	public interface IDefaultApiHandler
+	public interface IDefaultApiService
 	{
 		public Task<IActionResult> PingGet();
 	}
 
-	public class DefaultApiHandler : IDefaultApiHandler
+	public class DefaultApiService : IDefaultApiService
 	{
         private readonly IDefaultApi _defaultApi;
 
-        public DefaultApiHandler(IDefaultApi defaultApi)
+        public DefaultApiService(IDefaultApi defaultApi)
         {
 			_defaultApi = defaultApi;
         }

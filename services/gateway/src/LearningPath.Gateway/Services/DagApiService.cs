@@ -1,19 +1,18 @@
 ﻿using LearningPath.Gateway.Client.Dag.Api;
-using LearningPath.Gateway.Client.Dag.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearningPath.Gateway.Handlers
+namespace LearningPath.Gateway.Services
 {
-	public interface IDagApiHandler
+	public interface IDagApiService
 	{
 		public Task<IActionResult> DagGet(int dagid);
 	}
 
-	public class DagApiHandler : IDagApiHandler
+	public class DagApiService : IDagApiService
 	{
 		private readonly IDagApi _dagApi;
 
-		public DagApiHandler(IDagApi dagApi)
+		public DagApiService(IDagApi dagApi)
 		{
 			_dagApi = dagApi;
 		}

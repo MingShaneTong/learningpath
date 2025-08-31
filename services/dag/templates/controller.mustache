@@ -7,7 +7,7 @@ from typing import Union
 {{/imports}}
 from {{packageName}} import util
 {{#operations}}
-from {{packageName}}.handlers import {{#lambda.lowercase}}{{classname}}{{/lambda.lowercase}}_handler as handler
+from {{packageName}}.services import {{#lambda.lowercase}}{{classname}}{{/lambda.lowercase}}_service as service
 {{#operation}}
 
 
@@ -113,6 +113,6 @@ def {{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{
             {{/items}}
         {{/isMap}}
     {{/allParams}}
-    return handler.{{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
+    return service.{{operationId}}({{#allParams}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}{{#isBodyParam}}body{{/isBodyParam}}{{^-last}}, {{/-last}}{{/allParams}})
 {{/operation}}
 {{/operations}}
