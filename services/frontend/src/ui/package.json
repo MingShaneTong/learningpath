@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@heroui/react": "^2.8.2",
-    "@learningpath/client-gateway": "file:../clients/gateway/dist",
+    "@learningpath/client-gateway": "file:../clients/gateway",
     "cytoscape": "^3.33.1",
     "framer-motion": "^12.23.12",
     "next": "15.5.0",
