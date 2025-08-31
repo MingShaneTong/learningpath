@@ -71,6 +71,8 @@ src/.openapi-generator/
 
 # Generated OpenAPI files (but keep __init__.py)
 contracts/
+src/*
+src/dag/web/*
 src/dag/web/openapi/openapi.yaml
 src/dag/web/openapi/*.py
 src/dag/web/controllers/*.py

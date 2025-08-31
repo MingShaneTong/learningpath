@@ -1,6 +1,7 @@
 "use client"
 import { useCallback, useEffect, useState } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
+import { DagApi, Configuration, DagData } from "@learningpath/client-gateway";
 import DagPanel from "./DagPanel";
 import NotesPanel from "./NotesPanel";
 
@@ -54,9 +55,25 @@ function ColumnGrid({ children, layout, windowSize, onLayoutChange, resizeHandle
 }
 
 export default function Path() {
+  const [dagResult, setDagResult] = useState<DagData>();
   const [windowSize, setWindowSize] = useState<{ width: number; height: number }>();
   const [showSecondColumn, setShowSecondColumn] = useState(false);
   const [mainColumnWidth, setMainColumnWidth] = useState(8);
+  
+  useEffect(() => {
+    const config = new Configuration({
+      basePath: "/api"
+    });
+    const api = new DagApi(config);
+    api.dagGet({ dagid: 1 })
+      .then((response : DagData) => {
+        console.log(response)
+        setDagResult(response);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   // Update window size on resize
   useEffect(() => {
